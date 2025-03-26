@@ -1,0 +1,62 @@
+﻿@model SportsStore.WebUI.Models.ProductsListViewModel
+@{
+    ViewBag.Title = "Get Products";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<div class="container">
+    <h2 class="my-4 text-center">@ViewBag.Title</h2>
+
+    <div class="mb-4">
+        <label for="Category">Select Category:</label>
+
+<select>
+    @foreach (var category in Model.Categories)
+    {
+        <option value="@Url.Action("GetProducts", "Product", new { pageNo = 1, category = category })">
+            @category
+        </option>
+    }
+</select>
+
+        @Html.Partial("Menu", Model.Categories)
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var product in Model.Products)
+            {
+            <div class="col">
+                <div class="card h-100 shadow-sm border-light">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="Product Image" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text"><strong>Category:</strong> @product.Category</p>
+                        <p class="card-text"><strong>Price:</strong> ₹@product.Price.ToString("N2")</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        @Html.Partial("AddToCartButton", product)
+                    </div>
+
+               
+                    <div class="card-footer d-flex justify-content-between">
+                        @Html.ActionLink("Delete Product","DeleteProduct","Product" ,new { ProductId = product.ProductId })
+
+                    </div>
+                </div>
+            </div>
+            }
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("GetProducts", new { PageNo = x, Category = Model.CurrentCategory }))
+    </div>
+</div>
+

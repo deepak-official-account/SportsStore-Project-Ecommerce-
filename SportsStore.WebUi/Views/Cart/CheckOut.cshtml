@@ -1,0 +1,29 @@
+﻿@model SportsStore.Domain.Entities.ShippingDetails
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2>CheckOut</h2>
+
+@using (Html.BeginForm())
+    {
+
+    <label>Name</label>
+    @Html.TextBoxFor(x => x.Name, new { })
+
+
+    <label>Address</label>
+    @Html.TextBoxFor(x => x.Address, new { })
+
+    <label>City</label>
+    @Html.TextBoxFor(x => x.City, new { })
+    <label>State</label>
+    @Html.TextBoxFor(x => x.State, new { })
+    <label>PinCode</label>
+    @Html.TextBoxFor(x => x.PinCode, new { })
+    <label>Country</label>
+    @Html.TextBoxFor(x => x.Country, new { })
+
+    <input type="submit" value="Complete Order" />
+
+    }

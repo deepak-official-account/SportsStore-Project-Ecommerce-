@@ -1,0 +1,37 @@
+﻿@model SportsStore.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Add Product";
+}
+
+<h2>Add Product</h2>
+
+<!-- Bootstrap Form -->
+<form method="post" action="@Url.Action("AddProduct", "Admin")" enctype="multipart/form-data" class="container mt-4">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" class="form-control" id="Price" name="Price" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <input type="text" class="form-control" id="Category" name="Category" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ImageFile">Product Image</label>
+        <input type="file" class="form-control" id="ImageFile" name="ImageFile" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
