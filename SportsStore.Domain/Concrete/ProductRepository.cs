@@ -58,6 +58,7 @@ namespace SportsStore.Domain.Concrete
             if (product != null)
                 {
                 response=this.productDbContext.Products.Remove(product);
+                productDbContext.SaveChanges();
                 }
             return   response!=null;
             }
