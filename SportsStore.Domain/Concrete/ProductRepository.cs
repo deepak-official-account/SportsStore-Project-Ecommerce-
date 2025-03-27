@@ -54,6 +54,7 @@ namespace SportsStore.Domain.Concrete
         public bool DeleteProductById(int ProductId)
             {
             Product product = this.productDbContext.Products.FirstOrDefault(p => p.ProductId == ProductId);
+            var deletionResponse = this._cloudinaryService.DeleteImage(product);
             Product response=null;
             if (product != null)
                 {

@@ -46,19 +46,6 @@ namespace SportsStore.WebUI.Controllers
             return View(model);
             }
 
-        [Route("Product/DeleteProduct/{productId:int}")]
-        public ActionResult DeleteProduct(int ProductId)
-            {
-
-            bool response = this.repository.DeleteProductById(ProductId);
-            if (response)
-                {
-                ViewBag.message = "Product Deleted Successfully";
-                }
-
-            return RedirectToAction("AddProduct", "Product");
-
-            }
 
         }
     }

@@ -13,7 +13,7 @@ namespace SportsStore.WebUI.Controllers
     public class AdminController : Controller
         {
         private readonly IProductRepository _productRepository;
-        private static readonly CloudinaryService _cloudinaryService = new CloudinaryService();
+        private  readonly CloudinaryService _cloudinaryService = new CloudinaryService();
         private readonly string[] validContentTypes = { "image/jpeg", "image/png", "image/jpg" };
 
         public AdminController(IProductRepository productRepository)
@@ -38,11 +38,7 @@ namespace SportsStore.WebUI.Controllers
                 {
    
                 if (ImageFile != null && ImageFile.ContentLength > 0 && IsValidFileType(ImageFile) )
-                    {
-                    //var responseData = _cloudinaryService.UploadImage(ImageFile.InputStream, ImageFile.FileName);
-                    //product.ImagePublicId = responseData.PublicId.ToString();
-                    //product.ImageUrl = responseData.Url.ToString();
-
+                    { 
                     this._productRepository.CreateProduct(product,ImageFile.InputStream,ImageFile.FileName);
                     return RedirectToAction("GetProducts", "Product");
                     }
@@ -56,6 +52,24 @@ namespace SportsStore.WebUI.Controllers
                 }
             
             return View("AddProduct");
+            }
+
+
+
+
+        [HttpPost]
+        [Route("Admin/DeleteProduct/{productId:int}")]
+        public ActionResult DeleteProduct(int productId )
+            {
+
+            bool response = this._productRepository.DeleteProductById(productId );
+            if (response)
+                {
+                ViewBag.message = "Product Deleted Successfully";
+                }
+
+            return RedirectToAction("GetProducts", "Product");
+
             }
 
         private bool IsValidFileType(HttpPostedFileBase ImageFile)

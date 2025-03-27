@@ -8,6 +8,7 @@ using System.Web;
 using System.Configuration;
 //using DotNetEnv;
 using System.Security.Principal;
+using SportsStore.Domain.Entities;
 namespace SportsStore.Domain.Services
 {
     public class CloudinaryService
@@ -43,6 +44,17 @@ namespace SportsStore.Domain.Services
             var uploadResponse = this._cloudinary.Upload(uploadParams);
             
             return uploadResponse;
+            }
+
+        public dynamic DeleteImage ( Product product)
+            {
+            var deletionParams = new DeletionParams(product.ImagePublicId)
+                {
+                PublicId = product.ImagePublicId
+                };
+
+            var deletionResponse=this._cloudinary.Destroy(deletionParams);
+            return deletionResponse;
             }
         }
 }
